@@ -1,0 +1,154 @@
+{include  file="common/header"  /}
+<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="#">系统</a>
+                    </li>
+                                        <li class="active">用户管理</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<button data-toggle="modal" data-target="#myModal1" type="button" tooltip="添加用户" class="btn btn-sm btn-azure btn-addon"><i class="fa fa-plus"></i> 添加
+</button>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                <div class="flip-scroll" align="center">
+                    <table class="table table-bordered table-hover">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">用户名称</th>
+                                <th class="text-center">创建时间</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name="list" id="users"}
+                            <tr>
+                                <td align="center">{$users.id}</td>
+                                <td align="center">{$users.username}</td>
+                                <td align="center">{$users.createtime|date="Y-m-d H:i:s", ###}</td>
+                                <td align="center">
+                                    <a data-toggle="modal" data-target="#myModal2" href="javascript:void(0);" onclick="editAddress({$users.id},this)" class="btn btn-primary btn-sm shiny">
+                                        <i class="fa fa-edit" ></i> 修改
+                                    </a>
+                                    <a href="#" onClick="warning('确实要删除吗', '__ROOT__/admin/user/delete?id={$users.id}')" class="btn btn-danger btn-sm shiny">
+                                        <i class="fa fa-trash-o"></i> 删除
+                                    </a>
+                                </td>
+                            </tr>
+                            {/volist}
+                                
+                        </tbody>
+                        
+                    </table>
+                    {$page}
+                </div>
+
+                <div>
+                	</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+
+{include  file="common/footer"  /}
+<!-- 模态框 添加 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增用户
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="__ROOT__/admin/user/register" method="post" id="form2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">输入用户名</label>
+                        <input type="text" class="form-control" name="username" placeholder="用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">输入密码</label>
+                        <input type="password" class="form-control" name="password" placeholder="密码">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="btn2">
+                    提交
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框 修改 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增用户
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="__ROOT__/admin/user/update" method="post" id="form3">
+                	<input type="hidden" value="" id="rid" name="id">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">输入用户名</label>
+                        <input type="text" class="form-control" name="username" placeholder="用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">输入密码</label>
+                        <input type="password" class="form-control" name="password" placeholder="密码">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="btn3">
+                    提交
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#btn2").click(function(){
+    $("#form2").submit();
+  });
+  $("#btn3").click(function(){
+    $("#form3").submit();
+  });
+});
+//模态框传值
+function editAddress(id,obj){
+	//alert(id);
+	$("#rid").val(id);
+}
+</script>
+
+                
